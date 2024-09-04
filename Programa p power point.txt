@@ -1,9 +1,0 @@
-#include <iostream>
-
-typedef int ID;  // Gerando um typedef
-
-int main() {
-    ID usuario = 101;  // Em vez de utilizar 'int' como o tipo da variavel será utilizado 'ID' 
-    printf("O ID do usuário é: %d",usuario);
-    return 0;
-}
