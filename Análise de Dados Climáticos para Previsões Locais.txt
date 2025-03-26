@@ -1,8 +1,0 @@
-6. Análise de Dados Climáticos para Previsões Locais
- Objetivo: Usar dados históricos climáticos para prever o clima em uma região específica ou entender mudanças climáticas.
- 
- Descrição: Utilizando dados históricos de temperatura, precipitação, umidade e outros parâmetros climáticos, o projeto pode gerar previsões para o clima futuro ou até mesmo detectar tendências de mudança climática em determinada localidade.
- 
- Ferramentas: Python, Pandas, Matplotlib (para visualização), APIs climáticas como OpenWeatherMap ou dados de agências como INMET.
- 
- Possíveis desafios: Trabalhar com dados complexos e variáveis, encontrar fontes confiáveis de dados.
