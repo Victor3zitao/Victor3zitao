@@ -1,0 +1,115 @@
+A escolha do conector adequado é crucial para garantir a performance otimizada, a facilidade de instalação e a compatibilidade com recursos avançados do banco de dados. Um bom conector permite uma comunicação eficiente e segura entre o aplicativo e o Sistema de Gerenciamento de Banco de Dados (SGBD).
+
+Quando trabalhamos com banco de dados, é necessário usar bibliotecas que possibilitem a conexão entre a aplicação e o banco que será utilizado. Essas bibliotecas são conhecidas como conectores ou adaptadores.
+
+No contexto do Python, os conectores devem atender à PEP 249, que estabelece um conjunto de padrões para garantir maior portabilidade entre diferentes bancos de dados e melhorar a compatibilidade dos módulos. Isso facilita o desenvolvimento de aplicações que podem interagir com diversos SGBDs de maneira padronizada.
+
+Conectores Comuns em Python
+Os conectores mais utilizados no Python para diferentes bancos de dados incluem:
+
+psycopg2: Conector mais utilizado para o banco de dados PostgreSQL.
+
+mysqlclient, PyMySQL, mysql-connector-python: Conectores para o banco de dados MySQL.
+
+sqlite3: Adaptador padrão do Python para o banco de dados SQLite.
+
+Esses conectores seguem a PEP 249, garantindo uma interface padronizada e consistente, o que facilita o uso e a troca de módulos em projetos que envolvem diferentes tipos de banco de dados.
+
+Principais Funções dos Conectores
+Os conectores oferecem diversas funcionalidades para facilitar a interação com o banco de dados:
+
+Connect: Estabelece a conexão com o banco de dados.
+
+Commit: Confirma as transações realizadas no banco.
+
+Execute: Executa comandos SQL no banco de dados.
+
+Cursor: Classe utilizada para enviar comandos ao banco de dados, gerenciar a execução de queries e manipular resultados.
+
+Tipos de Dados e Classes no Banco de Dados
+Dentro dos conectores, há tipos de dados e classes que ajudam a definir e manipular os dados:
+
+Null: Representa valores nulos.
+
+Integer: Para valores inteiros.
+
+Real: Para números de ponto flutuante.
+
+Text: Para valores de texto (strings).
+
+Blob: Para armazenar dados exatamente como foram inseridos, como arquivos binários (ex.: bytes).
+
+Comandos SQL Comuns
+O uso de comandos SQL é essencial ao interagir com o banco de dados. Alguns dos comandos mais comuns são:
+
+CREATE TABLE: Cria uma nova tabela no banco de dados.
+
+ALTER TABLE: Modifica uma tabela existente.
+
+DROP TABLE: Exclui uma tabela do banco de dados.
+
+INSERT INTO: Insere novos registros em uma tabela.
+
+UPDATE: Atualiza registros existentes em uma tabela.
+
+DELETE: Remove registros de uma tabela.
+
+SELECT: Realiza uma consulta ao banco de dados para recuperar dados.
+
+O comando SELECT pode ser combinado com outras cláusulas, como:
+
+WHERE: Para filtrar resultados e especificar condições em uma pesquisa.
+
+JOIN: Para combinar dados de várias tabelas em uma única consulta.
+
+Delimitadores em Queries Dinâmicas
+Ao escrever queries dinâmicas, é importante saber qual delimitador utilizar:
+
+"?": No conector sqlite3, o delimitador "?" é usado para indicar parâmetros em queries dinâmicas.
+
+":param": Em outros casos, como com conectores que utilizam parâmetros nomeados, o delimitador é ":param".
+
+Esses delimitadores permitem a criação de consultas SQL mais flexíveis e seguras, prevenindo problemas como a injeção de SQL e garantindo que os dados sejam tratados corretamente.
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+A escolha do conector adequado pode impactar a performance, a facilidade de instalação e a compatibilidade com recursos avançados do banco de dados, permitindo uma comunicação eficiente e segura entre o aplicativo e o SGBD.
+
+Quando estamos trabalhando com banco de dados, precisamos pesquisar por bibliotecas que possibilitem a conexão da aplicação com o banco de dados que iremos utilizar.
+
+
+Na área de banco de dados, essas bibliotecas se chamam conectores ou adaptadores.
+
+Como estamos trabalhando com Python, devemos procurar por conectores que atendam a PEP 249.
+
+Essa PEP especifica um conjunto de padrões que os conectores devem seguir, a fim de garantir um melhor entendimento dos módulos e maior portabilidade entre bancos de dados.
+
+psycopg2: Conector mais utilizado para o banco de dados PostgreSQL.
+mysqlclient, PyMySQL e mysql-connector-python: Conectores para o banco de dados MySQL.
+sqlite3: Adaptador padrão do Python para o banco de dados SQLite.
+
+Conectores citados seguem a especificação Python Enhancement Proposals (PEP) 249, garantindo uma interface padronizada e consistente.
+
+Connect: Conecta com o banco de dados
+Commit: Confirma as transações realizadas
+Execute: Executa comandos SQL no banco de dados
+Cursor: Classe utilizada para enviar os comandos ao banco de dados
+
+As classes:
+Null para valores nulos, Integer para valores que são números inteiros, Real para números de ponto flutuante, Text para valores que são texto (string), Blob Para armazenar valores exatamente como foram inseridos, ex.: bytes.
+
+CREATE TABLE: cria a tabela
+ALTER TABLE: altera a tabela
+DROP TABLE: exclui a tabela
+
+INSERT INTO: Pode-se adicionar novos registros a classes.
+
+O delimitador "?" é utilizado no conector sqlite3 para indicar parâmetros em queries dinâmicas.
+
+O delimitador ":param" é utilizado para argumentos nomeados.
+
+UPDATE: Atualiza algum registro da tabela
+DELETE: Deleta algum registro da tabela
+SELECT: Usado para pesquisar no banco de dados
+WHERE: Utilizado junto ao SELECT especificar em uma pesquisa
+JOIN: Permite combinar dados de várias tabelas
