@@ -1,0 +1,87 @@
+Accout SID: AC577677acc1f3112cfc617bf1ec1e20b1
+Auth Token: a2c6aa0b639e08b1394c9e66b50822c9
+
+#include <WiFi.h>
+#include <OneWire.h>
+#include <DallasTemperature.h>
+#include <HTTPClient.h>
+
+// Definindo o pino do DS18B20
+#define ONE_WIRE_BUS 15  // Pino onde o DS18B20 está conectado (GPIO 15 no ESP32)
+
+// Definindo credenciais Wi-Fi
+const char* ssid = "SeuSSID";  // Substitua pelo seu SSID
+const char* password = "SuaSenha";  // Substitua pela sua senha Wi-Fi
+
+// Definindo as credenciais da Twilio API
+const String accountSID = "AC577677acc1f3112cfc617bf1ec1e20b1";  // Seu SID da Twilio
+const String authToken = "a2c6aa0b639e08b1394c9e66b50822c9";  // Seu Token de autenticação Twilio
+const String fromNumber = "whatsapp:+14155238886";  // Número Twilio (WhatsApp)
+const String toNumber = "whatsapp:+5561994547363";  // Seu número de celular no formato internacional
+
+// Configuração do sensor DS18B20
+OneWire oneWire(ONE_WIRE_BUS);
+DallasTemperature sensors(&oneWire);
+
+// Variável para simular a temperatura
+float simulatedTemperature = -20.0; // Temperatura inicial simulada
+
+void setup() {
+  Serial.begin(115200);
+  
+  // Conectando ao Wi-Fi
+  WiFi.begin(ssid, password);
+  while (WiFi.status() != WL_CONNECTED) {
+    delay(1000);
+    Serial.println("Conectando ao Wi-Fi...");
+  }
+  Serial.println("Conectado ao Wi-Fi!");
+  
+  // Inicializa o sensor DS18B20
+  sensors.begin();
+}
+
+void loop() {
+  // Simula uma mudança de temperatura a cada 10 segundos
+  simulatedTemperature += random(-2, 3); // Modifica a temperatura para cima ou para baixo entre -2 e +2 graus
+  if (simulatedTemperature < -30.0) simulatedTemperature = -30.0; // Limita a temperatura mínima
+  if (simulatedTemperature > 25.0) simulatedTemperature = 25.0;  // Limita a temperatura máxima
+
+  // Mostra a temperatura simulada
+  Serial.print("Temperatura Simulada: ");
+  Serial.print(simulatedTemperature);
+  Serial.println(" °C");
+
+  // Se a temperatura for acima de -18°C, envia o alerta via WhatsApp
+  if (simulatedTemperature > -18.0) {
+    String message = "ALERTA! A temperatura do freezer é: " + String(simulatedTemperature) + "°C. Está acima do limite!";
+    sendWhatsAppMessage(message);  // Envia a mensagem para o WhatsApp
+    Serial.println("Mensagem de alerta enviada!");
+  } else {
+    Serial.println("Temperatura abaixo de -18°C, nenhuma mensagem enviada.");
+  }
+
+  delay(60000);  // Atraso de 1 minuto antes de enviar novamente
+}
+
+void sendWhatsAppMessage(String message) {
+  // Envia a mensagem via Twilio API para o WhatsApp
+  HTTPClient http;
+  String url = "https://api.twilio.com/2010-04-01/Accounts/" + accountSID + "/Messages.json";
+  
+  http.begin(url);
+  http.setAuthorization(accountSID.c_str(), authToken.c_str());
+  http.addHeader("Content-Type", "application/x-www-form-urlencoded");
+
+  String body = "From=" + fromNumber + "&To=" + toNumber + "&Body=" + message;
+  
+  int httpResponseCode = http.POST(body);
+  
+  if (httpResponseCode > 0) {
+    Serial.println("Mensagem enviada com sucesso!");
+  } else {
+    Serial.println("Erro ao enviar a mensagem: " + String(httpResponseCode));
+  }
+
+  http.end();
+}
