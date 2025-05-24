@@ -1,6 +1,8 @@
 Accout SID: AC577677acc1f3112cfc617bf1ec1e20b1
 Auth Token: a2c6aa0b639e08b1394c9e66b50822c9
 
+        Codigo caso cliente implemente:
+
 #include <WiFi.h>
 #include <OneWire.h>
 #include <DallasTemperature.h>
@@ -85,3 +87,49 @@ void sendWhatsAppMessage(String message) {
 
   http.end();
 }
+
+                                      Codigo para usar: 
+
+#include <OneWire.h>
+#include <DallasTemperature.h>
+
+// Pino do sensor no Wokwi (simulado)
+#define ONE_WIRE_BUS 15
+
+// Inicialização do sensor
+OneWire oneWire(ONE_WIRE_BUS);
+DallasTemperature sensors(&oneWire);
+
+// Variável de temperatura simulada
+float simulatedTemperature = -20.0;
+
+void setup() {
+  Serial.begin(115200);
+  Serial.println("Simulador de Temperatura do Freezer Iniciado");
+
+  // Iniciar sensor (mesmo que simulado)
+  sensors.begin();
+}
+
+void loop() {
+  // Simula uma leitura de temperatura com variação
+  simulatedTemperature += random(-2, 3);
+  if (simulatedTemperature < -30.0) simulatedTemperature = -30.0;
+  if (simulatedTemperature > 25.0) simulatedTemperature = 25.0;
+
+  Serial.print("Temperatura Simulada: ");
+  Serial.print(simulatedTemperature);
+  Serial.println(" °C");
+
+  if (simulatedTemperature > -18.0) {
+    String message = "ALERTA! A temperatura do freezer é: " + String(simulatedTemperature) + "°C. Está acima do limite!";
+    // Simula envio via WhatsApp
+    Serial.println(">>> Enviando mensagem simulada via WhatsApp:");
+    Serial.println(message);
+  } else {
+    Serial.println("Temperatura OK, nenhuma mensagem enviada.");
+  }
+
+  delay(10000); // Espera 10 segundos antes da próxima simulação
+}
+
